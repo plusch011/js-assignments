@@ -110,14 +110,14 @@ function memoize(func) {
  */
 function retry(func, attempts = 0) {
     throw new Error('Not implemented');
-    return function caller (...args) {
-        try {
-            return func(...args);
-        } catch {
-            if (attempts--) caller(...args);
-            return 'expected';
-        }
-    }
+    // return function caller (...args) {
+    //     try {
+    //         return func(...args);
+    //     } catch {
+    //         if (attempts--) caller(...args);
+    //         return 'expected';
+    //     }
+    // }
 }
 
 
@@ -146,13 +146,13 @@ function retry(func, attempts = 0) {
  */
 function logger(func, logFunc) {
     throw new Error('Not implemented');
-    return function (...args){
-        let str = JSON.stringify(args);
-        logFunc(`${func.name}(${str.slice(1, -1)}) starts`);
-        let ans = func(...args);
-        logFunc(`${func.name}(${str.slice(1, -1)}) ends`);
-        return ans;
-    }
+    // return function (...args){
+    //     let str = JSON.stringify(args);
+    //     logFunc(`${func.name}(${str.slice(1, -1)}) starts`);
+    //     let ans = func(...args);
+    //     logFunc(`${func.name}(${str.slice(1, -1)}) ends`);
+    //     return ans;
+    // }
 }
 
 
@@ -171,7 +171,7 @@ function logger(func, logFunc) {
  */
 function partialUsingArguments(fn) {
     throw new Error('Not implemented');
-    return fn.bind(null, ...[...arguments].slice(1));
+    // return fn.bind(null, ...[...arguments].slice(1));
 }
 
 
