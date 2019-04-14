@@ -356,29 +356,29 @@ function isBracketsBalanced(str, open = [...'[({<'], close = [...'])}>']) {
  *   Date('2000-01-01 01:00:00.100'), Date('2015-01-02 03:00:05.000')  => '15 years ago'
  *
  */
-function timespanToHumanString(startDate, endDate, minutes = 60*1000, hours = 60*minutes, days = 24*hours) {
+function timespanToHumanString(startDate, endDate, minutes = 60 * 1000, hours = 60 * minutes, days = 24 * hours) {
     let diff = (endDate - startDate);
-        if (diff <= 45000)
-            return `a few seconds ago`;
-        if (diff <= 90000)
-            return `a minute ago`;
-        if (diff <= minutes*45)
-            return `${Math.round((diff - 1)/minutes)} minutes ago`;
-        if (diff <= minutes*90)
-            return `an hour ago`;
-        if (diff <= hours*22)
-            return `${Math.round((diff - 1)/ hours)} hours ago`;
-        if (diff <= hours*36)
-            return `a day ago`;
-        if (diff <= days*25)
-            return `${Math.round((diff - 1)/ days)} days ago`;
-        if (diff <= days*45)
-            return `a month ago`;
-        if (diff <= days*345)
-            return `${Math.round((diff - 1)/ (days*30))} months ago`;
-        if (diff <= days*545)
-            return `a year ago`;
-        return `${Math.round((diff - 1)/ (days*365))} years ago`;
+    if (diff <= 45000)
+        return `a few seconds ago`;
+    if (diff <= 90000)
+        return `a minute ago`;
+    if (diff <= minutes * 45)
+        return `${Math.round((diff - 1) / minutes)} minutes ago`;
+    if (diff <= minutes * 90)
+        return `an hour ago`;
+    if (diff <= hours * 22)
+        return `${Math.round((diff - 1) / hours)} hours ago`;
+    if (diff <= hours * 36)
+        return `a day ago`;
+    if (diff <= days * 25)
+        return `${Math.round((diff - 1) / days)} days ago`;
+    if (diff <= days * 45)
+        return `a month ago`;
+    if (diff <= days * 345)
+        return `${Math.round((diff - 1) / (days * 30))} months ago`;
+    if (diff <= days * 545)
+        return `a year ago`;
+    return `${Math.round((diff - 1) / (days * 365))} years ago`;
 }
 
 /**
@@ -440,9 +440,22 @@ function getCommonDirectoryPath(pathes) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+function getMatrixProduct(A, B) {
+    var rowsA = A.length, colsA = A[0].length,
+        rowsB = B.length, colsB = B[0].length,
+        C = [];
+    if (colsA != rowsB) return false;
+    for (var i = 0; i < rowsA; i++) C[i] = [];
+    for (var k = 0; k < colsB; k++) {
+        for (var i = 0; i < rowsA; i++) {
+            var t = 0;
+            for (var j = 0; j < rowsB; j++) t += A[i][j] * B[j][k];
+            C[i][k] = t;
+        }
+    }
+    return C;
 }
+
 
 
 /**
@@ -476,7 +489,21 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-    throw new Error('Not implemented');
+    for (let i = 0; i < 3; i++) {
+        let x = position[i].reduce((accum, item) => accum + item, "");
+        if (x == "000") return "0"
+        if (x == "XXX") return "X"
+    }
+    for (let i = 0; i < 3; i++) {
+        let x = position[0][i] + position[1][i] + position[2][i]
+        if (x == "000") return "0"
+        if (x == "XXX") return "X"
+    }
+
+    if (position[0][0] + position[1][1] + position[2][2] == "XXX") return "X";
+    if (position[0][0] + position[1][1] + position[2][2] == "000") return "0";
+    if (position[0][2] + position[1][1] + position[2][0] == "XXX") return "X";
+    if (position[0][2] + position[1][1] + position[2][0] == "000") return "0";
 }
 
 

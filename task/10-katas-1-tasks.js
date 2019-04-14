@@ -23,11 +23,11 @@ function createCompassPoints() {
     let str1, str2, strC;
 
     for (let i = 0; i < 32; i++) {
-        str1 = sides[Math.trunc(i/8)];
-        str2 = sides[(Math.trunc(i/8)+1)%4];
+        str1 = sides[Math.trunc(i / 8)];
+        str2 = sides[(Math.trunc(i / 8) + 1) % 4];
         strC = (str1 == sides[0] || str1 == sides[2]) ? str1 + str2 : str2 + str1;
-        let name = pattern[i%8].replace(1, str1).replace(2, str2).replace('C', strC);
-        ans.push({abbreviation: name, azimuth: i*11.25});
+        let name = pattern[i % 8].replace(1, str1).replace(2, str2).replace('C', strC);
+        ans.push({ abbreviation: name, azimuth: i * 11.25 });
     }
     return ans;
 }
@@ -99,8 +99,37 @@ function* expandBraces(str) {
  */
 function getZigZagMatrix(n) {
     throw new Error('Not implemented');
-}
+    // let num = 0;
+    // let arr = Array(n).fill([1, 1, 1]);
+    // for (let sum = 0; num != n*n; sum++) {
+    //     if (sum % 2) {
+    //         let row = 0;
+    //         let col = sum;
+    //         while (col >= 0) {
+    //             if (arr[row] && arr[row][col]) {
+    //                 arr[row][col] = num;
+    //                 num++;
+    //             }
+    //             row++;
+    //             col--;
+    //         }
+    //     } else {
+    //         let row = sum;
+    //         let col = 0;
+    //         while (row >= 0) {
+    //             if (arr[row] && arr[row][col]) {
+    //                 arr[row][col] = num;
+    //                 num++;
+    //             }
+    //             row--;
+    //             col++;
+    //         }
+    //     }
 
+    // }
+    // console.log(arr);
+    // return arr;
+}
 
 /**
  * Returns true if specified subset of dominoes can be placed in a row accroding to the game rules.
@@ -149,11 +178,11 @@ function canDominoesMakeRow(dominoes) {
 
 function extractRanges(nums) {
     let ans = [];
-    while(nums.length) {
+    while (nums.length) {
         let num = nums.shift();
         if (nums[1] == num + 2) {
             nums.shift();
-            while(nums[0] + 1 == nums[1]) {
+            while (nums[0] + 1 == nums[1]) {
                 nums.shift();
             }
             ans.push(num + '-' + nums.shift());
