@@ -19,15 +19,14 @@
 function createCompassPoints() {
     let ans = [];
     let sides = ['N', 'E', 'S', 'W'];
-    let pointDesc = ['1', '1b2', '1C', 'Cb1', 'C', 'Cb2', '2C', '2b1'];
+    let pattern = ['1', '1b2', '1C', 'Cb1', 'C', 'Cb2', '2C', '2b1'];
     let str1, str2, strC;
 
     for (let i = 0; i < 32; i++) {
-
         str1 = sides[Math.trunc(i/8)];
         str2 = sides[(Math.trunc(i/8)+1)%4];
         strC = (str1 == sides[0] || str1 == sides[2]) ? str1 + str2 : str2 + str1;
-        let name = pointDesc[i%8].replace(1, str1).replace(2, str2).replace('C', strC);
+        let name = pattern[i%8].replace(1, str1).replace(2, str2).replace('C', strC);
         ans.push({abbreviation: name, azimuth: i*11.25});
     }
     return ans;
@@ -125,6 +124,10 @@ function getZigZagMatrix(n) {
  */
 function canDominoesMakeRow(dominoes) {
     throw new Error('Not implemented');
+    // for(let i = 1; i < dominoes.length; i++) {
+        
+    // };
+    // return true;
 }
 
 
