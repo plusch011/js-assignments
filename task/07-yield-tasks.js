@@ -169,23 +169,15 @@ function* mergeSortedSequences(source1, source2) {
     let gen2 = source2();
     let obj1 = gen1.next();
     let obj2 = gen2.next();
-    do {
-        if (obj1.done && obj2.done) {
-            break;
-        } else if(obj1.done) {
+    while (true) {
+        if(obj1.done || obj1.value > obj2.value) {
             yield obj2.value;
             obj2 = gen2.next();
-        } else if (obj2.done) {
-            yield obj1.value;
-            obj1 = gen1.next();
-        } else if(obj1.value > obj2.value) {
-            yield obj2.value;
-            obj2 = gen2.next();
-        } else {
+        } else if (obj2.done || obj1.value < obj2.value) {
             yield obj1.value;
             obj1 = gen1.next();
         }
-    } while (true);
+    }
 }
 module.exports = {
     get99BottlesOfBeer: get99BottlesOfBeer,
