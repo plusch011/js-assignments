@@ -98,38 +98,43 @@ function* expandBraces(str) {
  *
  */
 function getZigZagMatrix(n) {
-    throw new Error('Not implemented');
-    // let num = 0;
-    // let arr = Array(n).fill([1, 1, 1]);
-    // for (let sum = 0; num != n*n; sum++) {
-    //     if (sum % 2) {
-    //         let row = 0;
-    //         let col = sum;
-    //         while (col >= 0) {
-    //             if (arr[row] && arr[row][col]) {
-    //                 arr[row][col] = num;
-    //                 num++;
-    //             }
-    //             row++;
-    //             col--;
-    //         }
-    //     } else {
-    //         let row = sum;
-    //         let col = 0;
-    //         while (row >= 0) {
-    //             if (arr[row] && arr[row][col]) {
-    //                 arr[row][col] = num;
-    //                 num++;
-    //             }
-    //             row--;
-    //             col++;
-    //         }
-    //     }
+    let num = 0;
+    let arr = []
+    for(let i = 0; i < n; i++) {
+        arr.push(Array(n).fill(1));
+    }
+    for (let sum = 0;  num != n*n; sum++) {
+        if (sum % 2) {
+            let row = 0;
+            let col = sum;
+            while (col >= 0) {
+                if (arr[row] && arr[row][col]) {
+                    arr[row][col] = num;
+                    num++;
+                }
+                row++;
+                col--;
+            }
+        } else {
+            let row = sum;
+            let col = 0;
+            while (row >= 0) {
+                if (arr[row] && arr[row][col]) {
+                    arr[row][col] = num;
+                    num++;
+                }
+                row--;
+                col++;
+            }
+        }
 
-    // }
-    // console.log(arr);
-    // return arr;
+    }
+    console.log(arr);
+    return arr;
 }
+
+getZigZagMatrix(4);
+let i = 0;
 
 /**
  * Returns true if specified subset of dominoes can be placed in a row accroding to the game rules.
