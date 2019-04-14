@@ -85,11 +85,12 @@ function getPolynom(...args) {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    let ans = new Map();
-    return function (x) {
-        if (!ans.has(x)) ans.set(x, func(x));
-        return ans.get(x);
-    }
+    throw new Error('Not implemented');
+    // let ans = new Map();
+    // return function (x) {
+    //     if (!ans.has(x)) ans.set(x, func(x));
+    //     return ans.get(x);
+    // }
 }
 
 
