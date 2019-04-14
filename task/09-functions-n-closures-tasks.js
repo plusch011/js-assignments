@@ -85,12 +85,11 @@ function getPolynom(...args) {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
-    // let ans = new Map();
-    // return function (x) {
-    //     if (!ans.has(x)) ans.set(x, func(x));
-    //     return ans.get(x);
-    // }
+    let ans = new Map();
+    return function (x) {
+        if (!ans.has(x)) ans.set(x, func(x));
+        return ans.get(x);
+    }
 }
 
 
@@ -110,6 +109,7 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts = 0) {
+    throw new Error('Not implemented');
     return function caller (...args) {
         try {
             return func(...args);
@@ -145,6 +145,7 @@ function retry(func, attempts = 0) {
  *
  */
 function logger(func, logFunc) {
+    throw new Error('Not implemented');
     return function (...args){
         let str = JSON.stringify(args);
         logFunc(`${func.name}(${str.slice(1, -1)}) starts`);
@@ -169,6 +170,7 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn) {
+    throw new Error('Not implemented');
     return fn.bind(null, ...[...arguments].slice(1));
 }
 
