@@ -109,15 +109,14 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts = 0) {
-    throw new Error('Not implemented');
-    // return function caller (...args) {
-    //     try {
-    //         return func(...args);
-    //     } catch {
-    //         if (attempts--) caller(...args);
-    //         return 'expected';
-    //     }
-    // }
+    return function caller (...args) {
+        try {
+            return func(...args);
+        } catch {
+            if (attempts--) caller(...args);
+            return 'expected';
+        }
+    }
 }
 
 
