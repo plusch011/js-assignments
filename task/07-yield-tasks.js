@@ -97,18 +97,18 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    const currRoots = [{children: [root], index: 0}];
- 
-    while(currRoots.length) {
+    const currRoots = [{ node: [root], index: 0 }];
+
+    while (currRoots.length) {
         const currRoot = currRoots[currRoots.length - 1];
-        if(currRoot.index === currRoot.children.length) {
-            currRoots.length--;
+        if (currRoot.index === currRoot.node.length) {
+            currRoots.pop();
         } else {
-            const item = currRoot.children[currRoot.index++]    
+            const item = currRoot.node[currRoot.index++]
             yield item;
- 
-            if(item.children){
-                currRoots.push({children: item.children, index: 0})
+
+            if (item.children) {
+                currRoots.push({ node: item.children, index: 0 })
             }
         }
     }
@@ -136,10 +136,21 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+    const currRoots = [[root]];
+
+    while (currRoots.length) {
+
+        const depth = currRoots.shift();
+
+        for (let key of depth) yield key;
+
+        for (let key of depth) {
+            if (key.children) {
+                currRoots.push(key.children);
+            }
+        }
+    }
 }
-
-
 /**
  * Merges two yield-style sorted sequences into the one sorted sequence.
  * The result sequence consists of sorted items from source iterators.
@@ -154,12 +165,28 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
-    if (source1) yield* source1();
-    if (source2) yield* source2()
+    let gen1 = source1();
+    let gen2 = source2();
+    let obj1 = gen1.next();
+    let obj2 = gen2.next();
+    do {
+        if (obj1.done && obj2.done) {
+            break;
+        } else if(obj1.done) {
+            yield obj2.value;
+            obj2 = gen2.next();
+        } else if (obj2.done) {
+            yield obj1.value;
+            obj1 = gen1.next();
+        } else if(obj1.value > obj2.value) {
+            yield obj2.value;
+            obj2 = gen2.next();
+        } else {
+            yield obj1.value;
+            obj1 = gen1.next();
+        }
+    } while (true);
 }
-
-
 module.exports = {
     get99BottlesOfBeer: get99BottlesOfBeer,
     getFibonacciSequence: getFibonacciSequence,
