@@ -124,10 +124,6 @@ function getZigZagMatrix(n) {
  */
 function canDominoesMakeRow(dominoes) {
     throw new Error('Not implemented');
-    // for(let i = 1; i < dominoes.length; i++) {
-        
-    // };
-    // return true;
 }
 
 
@@ -150,8 +146,22 @@ function canDominoesMakeRow(dominoes) {
  * [ 0, 1, 2, 5, 7, 8, 9] => '0-2,5,7-9'
  * [ 1, 2, 4, 5]          => '1,2,4,5'
  */
+
 function extractRanges(nums) {
-    throw new Error('Not implemented');
+    let ans = [];
+    while(nums.length) {
+        let num = nums.shift();
+        if (nums[1] == num + 2) {
+            nums.shift();
+            while(nums[0] + 1 == nums[1]) {
+                nums.shift();
+            }
+            ans.push(num + '-' + nums.shift());
+        } else {
+            ans.push(num);
+        }
+    }
+    return ans.join(',');
 }
 
 module.exports = {
