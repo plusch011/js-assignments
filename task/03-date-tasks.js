@@ -79,7 +79,11 @@ function isLeapYear(date) {
  */
 function timeSpanToString(startDate, endDate) {
    let date = endDate - startDate;
-   let ms = date%1000 < 10 ? `00${Math.floor(date%1000)}` : date%1000 < 100 ? `0${Math.floor(date%1000)}` : Math.floor(date%1000);
+   let ms = date%1000 < 10 
+      ? `00${Math.floor(date%1000)}` 
+      : date%1000 < 100 
+      ? `0${Math.floor(date%1000)}` 
+      : Math.floor(date%1000);
    date /= 1000;
    let sec =  date%60 < 10 ? `0${Math.floor(date%60)}` : Math.floor(date%60);
    date /= 60;

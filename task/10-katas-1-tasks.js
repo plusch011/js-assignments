@@ -17,10 +17,21 @@
  *  ]
  */
 function createCompassPoints() {
-    throw new Error('Not implemented');
-    var sides = ['N','E','S','W'];  // use array of cardinal directions only!
-}
+    let ans = [];
+    let sides = ['N', 'E', 'S', 'W'];
+    let pointDesc = ['1', '1b2', '1C', 'Cb1', 'C', 'Cb2', '2C', '2b1'];
+    let str1, str2, strC;
 
+    for (let i = 0; i < 32; i++) {
+
+        str1 = sides[Math.trunc(i/8)];
+        str2 = sides[(Math.trunc(i/8)+1)%4];
+        strC = (str1 == sides[0] || str1 == sides[2]) ? str1 + str2 : str2 + str1;
+        let name = pointDesc[i%8].replace(1, str1).replace(2, str2).replace('C', strC);
+        ans.push({abbreviation: name, azimuth: i*11.25});
+    }
+    return ans;
+}
 
 /**
  * Expand the braces of the specified string.
@@ -141,9 +152,9 @@ function extractRanges(nums) {
 }
 
 module.exports = {
-    createCompassPoints : createCompassPoints,
-    expandBraces : expandBraces,
-    getZigZagMatrix : getZigZagMatrix,
-    canDominoesMakeRow : canDominoesMakeRow,
-    extractRanges : extractRanges
+    createCompassPoints: createCompassPoints,
+    expandBraces: expandBraces,
+    getZigZagMatrix: getZigZagMatrix,
+    canDominoesMakeRow: canDominoesMakeRow,
+    extractRanges: extractRanges
 };
